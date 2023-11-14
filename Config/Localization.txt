@@ -1,0 +1,12 @@
+buffTakeHealth1Name,buffs,Buff,,,Uncomfortable Stretcher
+buffTakeHealth1Desc,buffs,Buff,,,Without the blood it would be decent bed.
+buffTakeHealth2Name,buffs,Buff,,,Comfortable Stretcher
+buffTakeHealth2Desc,buffs,Buff,,,Without the blood it would be good bed.
+
+buffHealHealth1Name,buffs,Buff,,,Uncomfortable Bedroll
+buffHealHealth1Desc,buffs,Buff,,,This bed is so uncomfortable, but better than nothing.
+buffHealHealth2Name,buffs,Buff,,,Uncomfortable Bed
+buffHealHealth2Desc,buffs,Buff,,,Better than sleeping on the floor.
+buffHealHealth3Name,buffs,Buff,,,Comfortable Bed
+buffHealHealth3Desc,buffs,Buff,,,Perfect for spending the night.
+

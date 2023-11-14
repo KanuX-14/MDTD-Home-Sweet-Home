@@ -1,6 +1,25 @@
 <configs>
-	<append xpath="/blocks/block[@name='bedroll']">
-		<property name="BuffsWhenWalkedOn" value="buffHealHealth"/>
-	</append>
+  <append xpath="/blocks/block[contains(@name,'hospitalBed')]">
+    <property name="BuffsWhenWalkedOn" value="buffTakeHealth2"/>
+  </append>
+  <append xpath="/blocks/block[contains(@name,'gurneyBed')]">
+    <property name="BuffsWhenWalkedOn" value="buffTakeHealth1"/>
+  </append>
+
+  <append xpath="/blocks/block[contains(@name,'bedroll')]">
+    <property name="BuffsWhenWalkedOn" value="buffHealHealth1"/>
+  </append>
+  <append xpath="/blocks/block[contains(@name,'BedMattress')]">
+    <property name="BuffsWhenWalkedOn" value="buffHealHealth1"/>
+  </append>
+  <append xpath="/blocks/block[contains(@name,'BedMessy')]">
+    <property name="BuffsWhenWalkedOn" value="buffHealHealth1"/>
+  </append>
+  <append xpath="/blocks/block[contains(@name,'BedMade')]">
+    <property name="BuffsWhenWalkedOn" value="buffHealHealth2"/>
+  </append>
+  <append xpath="/blocks/block[contains(@name,'bed02')]">
+    <property name="BuffsWhenWalkedOn" value="buffHealHealth3"/>
+  </append>
 </configs>
 

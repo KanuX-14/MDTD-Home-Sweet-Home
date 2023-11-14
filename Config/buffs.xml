@@ -1,3 +1,240 @@
 <configs>
-	<set xpath="/buffs/buff[@name='buffNearDeathTrauma']/duration/@value">3</set>
+  <append xpath="/buffs">
+
+    <!-- HEALTH BUFFERS -->
+
+    <!--
+      Health taking buffer:
+      1. Remove 0.2 health on every second.
+      2. Remove 0.5 health on every second.
+    -->
+
+    <buff name="buffTakeHealth1" name_key="buffTakeHealth1Name" description_key="buffTakeHealth1Desc" icon="ui_game_symbol_add" hidden="true">
+      <stack_type value="ignore"/>
+      <update_rate value="1"/>
+      <display_value value="$takenHealthAmount"/>
+      <effect_group>
+        <requirement name="CVarCompare" cvar=".NoHealingManager" operation="Equals" value="0"/>
+        <requirement name="CVarCompare" cvar="foodHealthAmount" operation="GTE" value="0"/>
+        <requirement name="CVarCompare" cvar="waterAmount" operation="GTE" value="0"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyStats" stat="Health" operation="subtract" value=".2"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="foodHealthAmount" operation="subtract" value="2"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="waterAmount" operation="subtract" value="1"/>
+      </effect_group>
+      <effect_group>
+        <requirement name="CVarCompare" cvar=".NoHealingManager" operation="Equals" value="0"/>
+        <requirement name="CVarCompare" cvar="medicalRegHealthAmount" operation="GT" value="0"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyStats" stat="Health" operation="add" value="@medRegHealthIncSpeed"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="medicalRegHealthAmount" operation="subtract" value="2"/>
+      </effect_group>
+      <effect_group name="display">
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$takenHealthAmount" operation="set" value="@medicalRegHealthAmount"/>
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$takenHealthAmount" operation="divide" value="2"/>
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$takenHealthAmount" operation="multiply" value="@medRegHealthIncSpeed"/>
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$takenHealthAmount" operation="add" value="@foodHealthAmount"/>
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$takenHealthAmount" operation="add" value="@waterAmount"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$takenHealthAmount" operation="set" value="@medicalRegHealthAmount"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$takenHealthAmount" operation="divide" value="2"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$takenHealthAmount" operation="multiply" value="@medRegHealthIncSpeed"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$takenHealthAmount" operation="add" value="@foodHealthAmount"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$takenHealthAmount" operation="add" value="@waterAmount"/>
+      </effect_group>
+      <effect_group>
+        <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffTakeHealth1">
+          <requirement name="CVarCompare" cvar="medicalRegHealthAmount" operation="LTE" value="0"/>
+          <requirement name="CVarCompare" cvar="foodHealthAmount" operation="LTE" value="-.5"/>
+          <requirement name="CVarCompare" cvar="waterAmount" operation="LTE" value="-.5"/>
+        </triggered_effect>
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="medRegHealthIncSpeed" operation="set" value="2"/>
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="foodHealthAmount" operation="set" value="0"/>                                                                 
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="waterAmount" operation="set" value="0"/>                                                                 
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="medicalRegHealthAmount" operation="set" value="0"/>
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="$takenHealthAmount" operation="set" value="0"/>
+      </effect_group>
+    </buff>
+
+    <buff name="buffTakeHealth2" name_key="buffTakeHealth2Name" description_key="buffTakeHealth2Desc" icon="ui_game_symbol_add" hidden="true">
+      <stack_type value="ignore"/>
+      <update_rate value="1"/>
+      <display_value value="$takenHealthAmount"/>
+      <effect_group>
+        <requirement name="CVarCompare" cvar=".NoHealingManager" operation="Equals" value="0"/>
+        <requirement name="CVarCompare" cvar="foodHealthAmount" operation="GTE" value="0"/>
+        <requirement name="CVarCompare" cvar="waterAmount" operation="GTE" value="0"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyStats" stat="Health" operation="subtract" value=".5"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="foodHealthAmount" operation="subtract" value="4"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="waterAmount" operation="subtract" value="2"/>
+      </effect_group>
+      <effect_group>
+        <requirement name="CVarCompare" cvar=".NoHealingManager" operation="Equals" value="0"/>
+        <requirement name="CVarCompare" cvar="medicalRegHealthAmount" operation="GT" value="0"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyStats" stat="Health" operation="add" value="@medRegHealthIncSpeed"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="medicalRegHealthAmount" operation="subtract" value="2"/>
+      </effect_group>
+      <effect_group name="display">
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$takenHealthAmount" operation="set" value="@medicalRegHealthAmount"/>
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$takenHealthAmount" operation="divide" value="2"/>
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$takenHealthAmount" operation="multiply" value="@medRegHealthIncSpeed"/>
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$takenHealthAmount" operation="add" value="@foodHealthAmount"/>
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$takenHealthAmount" operation="add" value="@waterAmount"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$takenHealthAmount" operation="set" value="@medicalRegHealthAmount"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$takenHealthAmount" operation="divide" value="2"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$takenHealthAmount" operation="multiply" value="@medRegHealthIncSpeed"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$takenHealthAmount" operation="add" value="@foodHealthAmount"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$takenHealthAmount" operation="add" value="@waterAmount"/>
+      </effect_group>
+      <effect_group>
+        <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffTakeHealth2">
+          <requirement name="CVarCompare" cvar="medicalRegHealthAmount" operation="LTE" value="0"/>
+          <requirement name="CVarCompare" cvar="foodHealthAmount" operation="LTE" value="-.5"/>
+          <requirement name="CVarCompare" cvar="waterAmount" operation="LTE" value="-.5"/>
+        </triggered_effect>
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="medRegHealthIncSpeed" operation="set" value="2"/>
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="foodHealthAmount" operation="set" value="0"/>                                                                 
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="waterAmount" operation="set" value="0"/>                                                                 
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="medicalRegHealthAmount" operation="set" value="0"/>
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="$takenHealthAmount" operation="set" value="0"/>
+      </effect_group>
+    </buff>
+
+    <!--
+      Health giving buffer:
+      1. Add 0.2 health on every second.
+      2. Add 0.5 health on every second.
+      3. Add 1 health on every second.
+    -->
+
+    <buff name="buffHealHealth1" name_key="buffHealHealth1Name" description_key="buffHealHealth1Desc" icon="ui_game_symbol_add" hidden="true">
+      <stack_type value="ignore"/>
+      <update_rate value="1"/>
+      <display_value value="$givenHealthAmount"/>
+      <effect_group>
+        <requirement name="CVarCompare" cvar=".NoHealingManager" operation="Equals" value="0"/>
+        <requirement name="CVarCompare" cvar="foodHealthAmount" operation="GTE" value="0"/>
+        <requirement name="CVarCompare" cvar="waterAmount" operation="GTE" value="0"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyStats" stat="Health" operation="add" value=".2"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="foodHealthAmount" operation="subtract" value="1"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="waterAmount" operation="subtract" value=".5"/>
+      </effect_group>
+      <effect_group>
+        <requirement name="CVarCompare" cvar=".NoHealingManager" operation="Equals" value="0"/>
+        <requirement name="CVarCompare" cvar="medicalRegHealthAmount" operation="GT" value="0"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyStats" stat="Health" operation="add" value="@medRegHealthIncSpeed"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="medicalRegHealthAmount" operation="subtract" value="2"/>
+      </effect_group>
+      <effect_group name="display">
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$givenHealthAmount" operation="set" value="@medicalRegHealthAmount"/>
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$givenHealthAmount" operation="divide" value="2"/>
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$givenHealthAmount" operation="multiply" value="@medRegHealthIncSpeed"/>
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$givenHealthAmount" operation="add" value="@foodHealthAmount"/>
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$givenHealthAmount" operation="add" value="@waterAmount"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$givenHealthAmount" operation="set" value="@medicalRegHealthAmount"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$givenHealthAmount" operation="divide" value="2"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$givenHealthAmount" operation="multiply" value="@medRegHealthIncSpeed"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$givenHealthAmount" operation="add" value="@foodHealthAmount"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$givenHealthAmount" operation="add" value="@waterAmount"/>
+      </effect_group>
+      <effect_group>
+        <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffHealHealth1">
+          <requirement name="CVarCompare" cvar="medicalRegHealthAmount" operation="LTE" value="0"/>
+          <requirement name="CVarCompare" cvar="foodHealthAmount" operation="LTE" value="-.5"/>
+          <requirement name="CVarCompare" cvar="waterAmount" operation="LTE" value="-.5"/>
+        </triggered_effect>
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="medRegHealthIncSpeed" operation="set" value="2"/>
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="foodHealthAmount" operation="set" value="0"/>                                                                 
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="waterAmount" operation="set" value="0"/>                                                                 
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="medicalRegHealthAmount" operation="set" value="0"/>
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="$givenHealthAmount" operation="set" value="0"/>
+      </effect_group>
+    </buff>
+
+    <buff name="buffHealHealth2" name_key="buffHealHealth2Name" description_key="buffHealHealth2Desc" icon="ui_game_symbol_add" hidden="true">
+      <stack_type value="ignore"/>
+      <update_rate value="1"/>
+      <display_value value="$givenHealthAmount"/>
+      <effect_group>
+        <requirement name="CVarCompare" cvar=".NoHealingManager" operation="Equals" value="0"/>
+        <requirement name="CVarCompare" cvar="foodHealthAmount" operation="GTE" value="0"/>
+        <requirement name="CVarCompare" cvar="waterAmount" operation="GTE" value="0"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyStats" stat="Health" operation="add" value=".5"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="foodHealthAmount" operation="subtract" value="2"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="waterAmount" operation="subtract" value="1"/>
+      </effect_group>
+      <effect_group>
+        <requirement name="CVarCompare" cvar=".NoHealingManager" operation="Equals" value="0"/>
+        <requirement name="CVarCompare" cvar="medicalRegHealthAmount" operation="GT" value="0"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyStats" stat="Health" operation="add" value="@medRegHealthIncSpeed"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="medicalRegHealthAmount" operation="subtract" value="2"/>
+      </effect_group>
+      <effect_group name="display">
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$givenHealthAmount" operation="set" value="@medicalRegHealthAmount"/>
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$givenHealthAmount" operation="divide" value="2"/>
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$givenHealthAmount" operation="multiply" value="@medRegHealthIncSpeed"/>
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$givenHealthAmount" operation="add" value="@foodHealthAmount"/>
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$givenHealthAmount" operation="add" value="@waterAmount"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$givenHealthAmount" operation="set" value="@medicalRegHealthAmount"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$givenHealthAmount" operation="divide" value="2"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$givenHealthAmount" operation="multiply" value="@medRegHealthIncSpeed"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$givenHealthAmount" operation="add" value="@foodHealthAmount"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$givenHealthAmount" operation="add" value="@waterAmount"/>
+      </effect_group>
+      <effect_group>
+        <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffHealHealth2">
+          <requirement name="CVarCompare" cvar="medicalRegHealthAmount" operation="LTE" value="0"/>
+          <requirement name="CVarCompare" cvar="foodHealthAmount" operation="LTE" value="-.5"/>
+          <requirement name="CVarCompare" cvar="waterAmount" operation="LTE" value="-.5"/>
+        </triggered_effect>
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="medRegHealthIncSpeed" operation="set" value="2"/>
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="foodHealthAmount" operation="set" value="0"/>                                                                 
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="waterAmount" operation="set" value="0"/>                                                                 
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="medicalRegHealthAmount" operation="set" value="0"/>
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="$givenHealthAmount" operation="set" value="0"/>
+      </effect_group>
+    </buff>
+
+    <buff name="buffHealHealth3" name_key="buffHealHealth3Name" description_key="buffHealHealth3Desc" icon="ui_game_symbol_add" hidden="true">
+      <stack_type value="ignore"/>
+      <update_rate value="1"/>
+      <display_value value="$givenHealthAmount"/>
+      <effect_group>
+        <requirement name="CVarCompare" cvar=".NoHealingManager" operation="Equals" value="0"/>
+        <requirement name="CVarCompare" cvar="foodHealthAmount" operation="GTE" value="0"/>
+        <requirement name="CVarCompare" cvar="waterAmount" operation="GTE" value="0"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyStats" stat="Health" operation="add" value="1"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="foodHealthAmount" operation="subtract" value="4"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="waterAmount" operation="subtract" value="2"/>
+      </effect_group>
+      <effect_group>
+        <requirement name="CVarCompare" cvar=".NoHealingManager" operation="Equals" value="0"/>
+        <requirement name="CVarCompare" cvar="medicalRegHealthAmount" operation="GT" value="0"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyStats" stat="Health" operation="add" value="@medRegHealthIncSpeed"/>
+          <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="medicalRegHealthAmount" operation="subtract" value="2"/>
+      </effect_group>
+      <effect_group name="display">
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$givenHealthAmount" operation="set" value="@medicalRegHealthAmount"/>
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$givenHealthAmount" operation="divide" value="2"/>
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$givenHealthAmount" operation="multiply" value="@medRegHealthIncSpeed"/>
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$givenHealthAmount" operation="add" value="@foodHealthAmount"/>
+        <triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$givenHealthAmount" operation="add" value="@waterAmount"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$givenHealthAmount" operation="set" value="@medicalRegHealthAmount"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$givenHealthAmount" operation="divide" value="2"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$givenHealthAmount" operation="multiply" value="@medRegHealthIncSpeed"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$givenHealthAmount" operation="add" value="@foodHealthAmount"/>
+        <triggered_effect trigger="onSelfBuffUpdate" action="ModifyCVar" cvar="$givenHealthAmount" operation="add" value="@waterAmount"/>
+      </effect_group>
+      <effect_group>
+        <triggered_effect trigger="onSelfBuffUpdate" action="RemoveBuff" buff="buffHealHealth3">
+          <requirement name="CVarCompare" cvar="medicalRegHealthAmount" operation="LTE" value="0"/>
+          <requirement name="CVarCompare" cvar="foodHealthAmount" operation="LTE" value="-.5"/>
+          <requirement name="CVarCompare" cvar="waterAmount" operation="LTE" value="-.5"/>
+        </triggered_effect>
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="medRegHealthIncSpeed" operation="set" value="2"/>
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="foodHealthAmount" operation="set" value="0"/>                                                                 
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="waterAmount" operation="set" value="0"/>                                                                 
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="medicalRegHealthAmount" operation="set" value="0"/>
+        <triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="$givenHealthAmount" operation="set" value="0"/>
+      </effect_group>
+    </buff>
+  </append>
 </configs>
+
