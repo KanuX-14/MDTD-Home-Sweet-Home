@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-
 <xml>
-	<ModInfo>
-		<Name value="MDTD - Home Sweet Home"/>
-		<Description value="Add functionalities for various furnitures."/>
-		<Author value="KanuX"/>
-		<Version value="0.0.1" compat="A20"/>
-	</ModInfo>
+  <ModInfo>
+    <Name value="Home Sweet Home"/>
+    <Description value="Add buffs for various furnitures."/>
+    <Author value="MoreDaysToDie"/>
+    <Version value="0.0.2" compat="A20"/>
+  </ModInfo>
 </xml>
 
