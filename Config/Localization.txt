@@ -1,3 +1,5 @@
+Key,File,Type,UsedInMainMenu,NoTranslate,english,Context / Alternate Text
+
 buffTakeHealth1Name,buffs,Buff,,,Uncomfortable Stretcher
 buffTakeHealth1Desc,buffs,Buff,,,Without the blood it would be decent bed.
 buffTakeHealth2Name,buffs,Buff,,,Comfortable Stretcher
