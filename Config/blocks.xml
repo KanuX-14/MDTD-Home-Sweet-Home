@@ -1,4 +1,7 @@
-<configs>
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<mdtdHomeSweetHome>
+
   <append xpath="/blocks/block[contains(@name,'hospitalBed')]">
     <property name="BuffsWhenWalkedOn" value="buffTakeHealth2"/>
   </append>
@@ -21,5 +24,6 @@
   <append xpath="/blocks/block[contains(@name,'bed02')]">
     <property name="BuffsWhenWalkedOn" value="buffHealHealth3"/>
   </append>
-</configs>
+
+</mdtdHomeSweetHome>
 

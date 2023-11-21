@@ -1,4 +1,6 @@
-<configs>
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<mdtdHomeSweetHome>
   <append xpath="/buffs">
 
     <!-- HEALTH BUFFERS -->
@@ -236,5 +238,5 @@
       </effect_group>
     </buff>
   </append>
-</configs>
+</mdtdHomeSweetHome>
 
