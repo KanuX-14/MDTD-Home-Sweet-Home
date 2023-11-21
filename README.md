@@ -11,6 +11,8 @@ Stand on top of the furniture to receive the buff.
 Installation
 ------------
 
+First download the mod's archive. [[ZIP](https://gitlab.com/moredaystodie/home-sweet-home/-/archive/master/home-sweet-home-master.zip)/[TAR](https://gitlab.com/moredaystodie/home-sweet-home/-/archive/master/home-sweet-home-master.tar.gz)]
+
 Move the `home-sweet-home-master` folder to 7 Days to Die's mod folder.<br>
 
 - Steam:
